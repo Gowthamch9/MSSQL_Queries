@@ -6,7 +6,7 @@ SELECT Num + 1
 FROM Numbers
 WHERE Num < 10)
 
--------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 
 /* Question - For each Sales Territory, identify the top 3 best-selling products based on total quantity sold.
 For Each Product show:
