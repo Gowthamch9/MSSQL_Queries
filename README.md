@@ -41,7 +41,7 @@ It showcases my ability to write optimized SQL queries for data analysis, report
 - **Stored Procedures, Views & Functions**:  
   Encapsulating business logic into reusable modules.
 
-- **Advanced Use Cases**  
+ ### 💾 **Advanced Use Cases**  
   - Identifying Products Sales Status
   - Identifying Top 3 sales in each territory
   - Identifying Top 3 avg monthly quantity sold in each territory
