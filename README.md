@@ -37,6 +37,6 @@ It showcases my ability to write optimized SQL queries for data analysis, report
   - Writing **Stored Procedures** to encapsulate complex business logic  
 
 - **Advanced Use Cases**  
-  - Identifying the products sales status
-  - Identifying Top 3 Sales in each territory
-  - Identifying top 3 avg monthly quantity sold in each territory  
+  - Identifying Products Sales Status
+  - Identifying Top 3 sales in each territory
+  - Identifying Top 3 avg monthly quantity sold in each territory
