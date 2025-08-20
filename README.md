@@ -1,4 +1,4 @@
-# 🗄️ MSSQL Queries  
+# 🗄️ MSSQL_Queries  
 
 This repository contains **SQL practice queries and complex business use case queries** written in **Microsoft SQL Server (MSSQL)** using the **AdventureWorks2019 sample database**.  
 
