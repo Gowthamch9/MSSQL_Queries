@@ -15,26 +15,31 @@ It showcases my ability to write optimized SQL queries for data analysis, report
 
 ## 🛠️ Key SQL Concepts Demonstrated  
 
-- **Basic Queries**  
-  - Filtering records with `WHERE`  
-  - Sorting data with `ORDER BY`  
-  - Aggregations with `SUM`, `AVG`, `COUNT`, `MIN`, `MAX`  
+ ### 📘 Basic to Intermediate  
+- Filtering with `WHERE` and sorting with `ORDER BY`  
+- Aggregations: `SUM`, `AVG`, `COUNT`, `MIN`, `MAX`  
+- Joins: `INNER`, `LEFT`, `RIGHT`, `FULL OUTER`  
+- Subqueries & Common Table Expressions (CTEs)  
 
-- **Joins**  
-  - `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `FULL OUTER JOIN`  
-  - Joining multiple tables for relational analysis  
+### 📗 Advanced SQL Functions & Keywords  
 
-- **Subqueries & CTEs**  
-  - Using **subqueries** to filter results  
-  - Writing **Common Table Expressions (CTEs)** for modular query design  
+- **Window Functions**:  
+  `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`, `NTILE()`, `LAG()`, `LEAD()`, Running Totals  
 
-- **Window Functions**  
-  - Ranking (`ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`)  
-  - Running totals & moving averages with `OVER()`  
+- **Recursive CTEs**:  
+  Useful for hierarchical data like org charts and category trees.  
 
-- **Views & Stored Procedures**  
-  - Creating reusable **Views** for business-critical reporting  
-  - Writing **Stored Procedures** to encapsulate complex business logic  
+- **CROSS APPLY / OUTER APPLY**:  
+  Joining with subqueries or table-valued functions.  
+
+- **PIVOT & UNPIVOT**:  
+  Transforming rows into columns and vice versa.  
+
+- **String & Date Functions**:  
+  `STRING_AGG()`, `FORMAT()`, `DATEPART()`, `DATENAME()`  
+
+- **Stored Procedures, Views & Functions**:  
+  Encapsulating business logic into reusable modules.
 
 - **Advanced Use Cases**  
   - Identifying Products Sales Status
