@@ -119,4 +119,22 @@ from AOV1
 order by AvgRankOrder;
 
 
+-----------------------------------------------------------------------------
+--6) Which day of the week has the highest and lowest sales?
+with DaySales as (
+select Order_Day,
+       count(total_orders) as TotalOrders,
+       sum(total_price) as TotalSalesbyDay
+from pizza
+group by Order_Day)
+
+select Order_Day,
+       TotalSalesbyDay,
+       case
+       when TotalSalesbyDay = (select max(TotalSalesbyDay) from DaySales) then 'HighestSalesDay'
+       when TotalSalesbyDay = (select min(TotalSalesbyDay) from DaySales) then 'LeastSalesDay'
+       else 'NormalDay'
+       end as Daystats,
+       rank() over (order by TotalSalesbyDay Desc) as SalesRank
+from DaySales
 
