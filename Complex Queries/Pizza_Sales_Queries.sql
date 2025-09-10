@@ -138,3 +138,24 @@ select Order_Day,
        rank() over (order by TotalSalesbyDay Desc) as SalesRank
 from DaySales
 
+
+-----------------------------------------------------------------
+--7) What are the peak order times during the day (lunch vs. dinner)?
+--I am considering lunch time from 11AM to 3PM & Snack time from 3PM to 7PM & Dinner time from 7PM to 11PM
+with TotalOrders as(
+select order_id,
+       case
+       when order_time between '11:00:00' and '14:59:59' then 'Lunch Time'
+       when order_time between '15:00:00' and '18:59:59' then 'Snack Time'
+       else 'Dinner Time'
+       end as ordertime
+from pizza)
+
+select ordertime,
+       count(distinct order_id) as totalorders
+from TotalOrders
+group by ordertime
+order by totalorders desc;
+
+
+       
