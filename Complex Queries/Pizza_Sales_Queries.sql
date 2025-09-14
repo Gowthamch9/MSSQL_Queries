@@ -158,4 +158,53 @@ group by ordertime
 order by totalorders desc;
 
 
-       
+ -----------------------------------------------------------------
+ --8) Is there a seasonal or monthly trend in pizza sales?
+--I am considering Feb to Apr as Spring, May to August as summer, September to November as Fall, December, Jan as Winter.
+--I will also write a query to find the monthly trend.
+
+
+select datepart(m,order_date)
+from pizza
+order by pizza_id
+
+alter table pizza
+add MonthNumber int;
+
+update pizza
+set MonthNumber = datepart(m,order_date)
+
+--Seasonal Sales
+with Seasons as (
+select 
+        case 
+        when MonthNumber between 2 and 4 then 'Spring'
+        when MonthNumber between 5 and 8 then 'Summer'
+        when MonthNumber between 9 and 11 then 'Fall'
+        else 'Winter'
+        end as seasons,
+        total_price
+from pizza)
+
+select seasons,
+       sum(total_price) as TotalSeasonalSales
+from Seasons
+group by seasons
+
+--Monthly Sales
+--Month over Month Sales, gives a clear where your sales are at this point with compared to the starting point.
+with MonthlySales as 
+(select MonthNumber,
+       Month,
+       SUM(total_price) as TotalMonthlySales
+from pizza
+group by MonthNumber, Month)
+
+select MonthNumber,
+       Month,
+       TotalMonthlySales,
+       lag(TotalMonthlySales) over (order by MonthNumber) as PreviousMonthSales,
+       TotalMonthlySales - lag(TotalMonthlySales) over (order by MonthNumber) as SalesDifference,
+       round(((TotalMonthlySales - lag(TotalMonthlySales) over (order by MonthNumber))/lag(TotalMonthlySales) over (order by MonthNumber)) * 100,2) as MonthOverTrends
+from MonthlySales
+order by MonthNumber
