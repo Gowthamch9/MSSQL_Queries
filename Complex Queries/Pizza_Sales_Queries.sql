@@ -26,12 +26,13 @@ set Month = format(order_date, 'MMMM')
 
 
 --Monthly SALES and orders-----------------
-select Month,
+select MonthNumber,
+       Month,
        count(total_orders) as TotalOrders,
        sum(total_price) as TotalSalesbyMonth
 from pizza
-group by Month
-order by TotalSalesbyMonth desc;
+group by Month, MonthNumber
+order by MonthNumber;
 
 
 select datepart(wk, order_date) as weeknumber
@@ -208,3 +209,57 @@ select MonthNumber,
        round(((TotalMonthlySales - lag(TotalMonthlySales) over (order by MonthNumber))/lag(TotalMonthlySales) over (order by MonthNumber)) * 100,2) as MonthOverTrends
 from MonthlySales
 order by MonthNumber
+
+
+---------------------------------------------------------------
+--9)What is the average number of pizzas per order? 
+
+with PizzasPerOrderCTE as (
+select order_id,
+       count(pizza_id) as totalpizzasperorder
+from pizza
+group by order_id)
+
+select sum(totalpizzasperorder)/count(order_id) as PizzasPerOrder
+from PizzasPerOrderCTE
+
+---------------------------------------------------------------------
+--10)Which pizzas bring in high revenue but low order volume (suggest premium niche products)?
+
+select top 5 pizza_name,
+       count(pizza_id) as totalPizzas,
+       sum(total_price) as TotalSales,
+       sum(total_price) * 1.0/count(pizza_id) as RevenuePerPizza
+from pizza
+group by pizza_name
+order by RevenuePerPizza Desc, totalPizzas ASC
+       
+
+-------------------------------------------------------------------
+--11)Which pizzas bring in high order volume but low revenue per unit (suggest bundle deals or upsell opportunities)?
+
+select top 5 pizza_name,
+       count(pizza_id) as totalPizzas,
+       sum(total_price) as TotalSales,
+       sum(total_price) * 1.0/count(pizza_id) as RevenuePerPizza
+from pizza
+group by pizza_name
+order by RevenuePerPizza ASC, totalPizzas DESC
+
+
+--------------------------------------------------------------------------
+--12)Which pizzas are frequently bought together (basket analysis – if order_id groups allow)?
+
+select p1.pizza_name,
+       p2.pizza_name,
+       count(distinct p1.order_id) as TimesBoughtTogether
+from pizza p1
+join pizza p2
+on p1.order_id = p2.order_id
+and p1.pizza_name < p2.pizza_name
+group by p1.pizza_name, p2.pizza_name
+order by TimesBoughtTogether desc
+
+------------------------------------------------------------------------------
+
+
